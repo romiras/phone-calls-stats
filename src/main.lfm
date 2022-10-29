@@ -5,25 +5,25 @@ object MainForm: TMainForm
   Top = 149
   Width = 580
   HorzScrollBar.Page = 579
-  VertScrollBar.Page = 307
+  VertScrollBar.Page = 311
   ActiveControl = ListBox1
   Caption = 'Call Statistics'
-  ClientHeight = 308
+  ClientHeight = 312
   ClientWidth = 580
   Menu = MainMenu
   object lbCallList: TLabel
     Left = 16
-    Height = 18
+    Height = 14
     Top = 24
-    Width = 97
+    Width = 79
     Caption = 'Called party list:'
     ParentColor = False
   end
   object lbGroup: TLabel
     Left = 272
-    Height = 18
+    Height = 14
     Top = 26
-    Width = 44
+    Width = 34
     Caption = 'Group:'
     ParentColor = False
   end
@@ -75,19 +75,25 @@ object MainForm: TMainForm
     Width = 80
     Caption = 'Create new'
     OnClick = btCreateClick
-    TabOrder = 4
+    TabOrder = 5
   end
   object cobGoupSelector: TComboBox
     Left = 272
-    Height = 24
+    Height = 21
     Hint = 'Select group'
     Top = 39
     Width = 168
     AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
-    ItemHeight = 16
+    ItemHeight = 13
     OnCloseUp = cobGoupSelectorCloseUp
     Style = csDropDownList
-    TabOrder = 5
+    TabOrder = 4
+  end
+  object StatusBar: TStatusBar
+    Height = 20
+    Top = 292
+    Width = 580
+    Panels = <>
   end
   object MainMenu: TMainMenu
     left = 7

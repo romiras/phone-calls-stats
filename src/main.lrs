@@ -1,13 +1,11 @@
-{ This is an automatically generated lazarus resource file }
-
 LazarusResources.Add('TMainForm','FORMDATA',[
   'TPF0'#9'TMainForm'#8'MainForm'#4'Left'#3'"'#1#6'Height'#3'L'#1#4'Hint'#6#12
   +'Add to group'#3'Top'#3#149#0#5'Width'#3'D'#2#18'HorzScrollBar.Page'#3'C'#2
-  +#18'VertScrollBar.Page'#3'3'#1#13'ActiveControl'#7#8'ListBox1'#7'Caption'#6
-  +#15'Call Statistics'#12'ClientHeight'#3'4'#1#11'ClientWidth'#3'D'#2#4'Menu'#7
-  +#8'MainMenu'#0#6'TLabel'#10'lbCallList'#4'Left'#2#16#6'Height'#2#18#3'Top'#2
-  +#24#5'Width'#2'a'#7'Caption'#6#18'Called party list:'#11'ParentColor'#8#0#0#6
-  +'TLabel'#7'lbGroup'#4'Left'#3#16#1#6'Height'#2#18#3'Top'#2#26#5'Width'#2','#7
+  +#18'VertScrollBar.Page'#3'7'#1#13'ActiveControl'#7#8'ListBox1'#7'Caption'#6
+  +#15'Call Statistics'#12'ClientHeight'#3'8'#1#11'ClientWidth'#3'D'#2#4'Menu'#7
+  +#8'MainMenu'#0#6'TLabel'#10'lbCallList'#4'Left'#2#16#6'Height'#2#14#3'Top'#2
+  +#24#5'Width'#2'O'#7'Caption'#6#18'Called party list:'#11'ParentColor'#8#0#0#6
+  +'TLabel'#7'lbGroup'#4'Left'#3#16#1#6'Height'#2#14#3'Top'#2#26#5'Width'#2'"'#7
   +'Caption'#6#6'Group:'#11'ParentColor'#8#0#0#8'TListBox'#8'ListBox1'#4'Left'#2
   +#16#6'Height'#3#239#0#4'Hint'#6'9Select phone numbers and move them to corre'
   +'sponding group'#3'Top'#2''''#5'Width'#3#160#0#11'MultiSelect'#9#6'Sorted'#9
@@ -20,17 +18,18 @@ LazarusResources.Add('TMainForm','FORMDATA',[
   +#2'1'#7'Caption'#6#2'<<'#7'Enabled'#8#7'OnClick'#7#13'btRemoveClick'#8'TabOr'
   +'der'#2#3#0#0#7'TButton'#8'btCreate'#4'Left'#3#192#1#6'Height'#2#21#3'Top'#2
   +''''#5'Width'#2'P'#7'Caption'#6#10'Create new'#7'OnClick'#7#13'btCreateClick'
-  +#8'TabOrder'#2#4#0#0#9'TComboBox'#15'cobGoupSelector'#4'Left'#3#16#1#6'Heigh'
-  +'t'#2#24#4'Hint'#6#12'Select group'#3'Top'#2''''#5'Width'#3#168#0#16'AutoCom'
+  +#8'TabOrder'#2#5#0#0#9'TComboBox'#15'cobGoupSelector'#4'Left'#3#16#1#6'Heigh'
+  +'t'#2#21#4'Hint'#6#12'Select group'#3'Top'#2''''#5'Width'#3#168#0#16'AutoCom'
   +'pleteText'#11#22'cbactEndOfLineComplete'#20'cbactSearchAscending'#0#10'Item'
-  +'Height'#2#16#9'OnCloseUp'#7#22'cobGoupSelectorCloseUp'#5'Style'#7#14'csDrop'
-  +'DownList'#8'TabOrder'#2#5#0#0#9'TMainMenu'#8'MainMenu'#4'left'#2#7#0#9'TMen'
-  +'uItem'#6'mnFile'#7'Caption'#6#5'&File'#0#9'TMenuItem'#12'mnFileImport'#7'Ca'
-  +'ption'#6#7'&Import'#8'ShortCut'#3'I@'#7'OnClick'#7#17'mnFileImportClick'#0#0
-  +#9'TMenuItem'#8'mnSpace1'#0#0#9'TMenuItem'#6'mnExit'#7'Caption'#6#5'E&xit'#7
-  +'OnClick'#7#11'mnExitClick'#0#0#0#9'TMenuItem'#6'mnHelp'#7'Caption'#6#5'&Hel'
-  +'p'#0#9'TMenuItem'#7'mnAbout'#7'Caption'#6#5'About'#7'OnClick'#7#12'mnAboutC'
-  +'lick'#0#0#0#0#11'TOpenDialog'#10'OpenDialog'#5'Title'#6#18'Open existing fi'
-  +'le'#6'Filter'#6'=Comma Separated Values file (*.csv)|*.csv|All files (*.*)|'
-  +'*.*'#4'left'#2'@'#0#0#0
+  +'Height'#2#13#9'OnCloseUp'#7#22'cobGoupSelectorCloseUp'#5'Style'#7#14'csDrop'
+  +'DownList'#8'TabOrder'#2#4#0#0#10'TStatusBar'#9'StatusBar'#6'Height'#2#20#3
+  +'Top'#3'$'#1#5'Width'#3'D'#2#6'Panels'#14#0#0#0#9'TMainMenu'#8'MainMenu'#4'l'
+  +'eft'#2#7#0#9'TMenuItem'#6'mnFile'#7'Caption'#6#5'&File'#0#9'TMenuItem'#12'm'
+  +'nFileImport'#7'Caption'#6#7'&Import'#8'ShortCut'#3'I@'#7'OnClick'#7#17'mnFi'
+  +'leImportClick'#0#0#9'TMenuItem'#8'mnSpace1'#0#0#9'TMenuItem'#6'mnExit'#7'Ca'
+  +'ption'#6#5'E&xit'#7'OnClick'#7#11'mnExitClick'#0#0#0#9'TMenuItem'#6'mnHelp'
+  +#7'Caption'#6#5'&Help'#0#9'TMenuItem'#7'mnAbout'#7'Caption'#6#5'About'#7'OnC'
+  +'lick'#7#12'mnAboutClick'#0#0#0#0#11'TOpenDialog'#10'OpenDialog'#5'Title'#6
+  +#18'Open existing file'#6'Filter'#6'=Comma Separated Values file (*.csv)|*.c'
+  +'sv|All files (*.*)|*.*'#4'left'#2'@'#0#0#0
 ]);

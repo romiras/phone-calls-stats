@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, LResources, Forms, Controls, Graphics, Dialogs, StdCtrls,
-  ExtCtrls, Menus;
+  ExtCtrls, Menus, ComCtrls;
 
 type
 
@@ -29,6 +29,7 @@ type
     mnFile: TMenuItem;
     mnFileImport: TMenuItem;
     OpenDialog: TOpenDialog;
+    StatusBar: TStatusBar;
     procedure btAddClick(Sender: TObject);
     procedure btRemoveClick(Sender: TObject);
     procedure btCreateClick(Sender: TObject);
@@ -46,7 +47,7 @@ var
   MainForm: TMainForm;
 
 implementation
-uses crwzrd, cstypes;
+uses crwzrd, cstypes, tlstypes, tlsconv;
 
 var
    Selection: integer; // cobGoupSelector.ItemIndex
@@ -64,10 +65,62 @@ begin
 end;
 
 procedure TMainForm.mnFileImportClick(Sender: TObject);
+Var
+  Fin: TCallList;
+  Call: TCall;
+  fn, stmp: string;
+  k, res: integer;
 begin
+  Fin := TCallList.Create;
   if OpenDialog.Execute then
   begin
-    ListBox1.Items.LoadFromFile(OpenDialog.FileName);
+     fn := OpenDialog.FileName;
+     Try
+          StatusBar.SimpleText := 'Importing into database';
+          //ListBox1.BeginUpdateBounds;
+          res := ReadCallList (fn, Fin);
+          if res <> No_Errors then
+          begin
+               case res of
+                Err_Unknown:
+                  stmp := 'Unknown';
+                Err_Not_Supported:
+                  stmp := 'File type is not supported.';
+                Err_Alloc:
+                  stmp := 'Memory allocation failed.';
+                Err_ListOp:
+                  stmp := 'List operation.';
+               end;
+               ShowMessage ('An error occured while reading file: '+stmp);
+               exit;
+          end;
+          
+          //ShowMessage(IntToStr(CallList.Count));
+          for k := 0 to Fin.Count-1 do
+          begin
+               //ShowMessage(inttostr(k));
+               Call := TCall (Fin[k]);
+               if Assigned (Call) then
+               begin
+                    {with Call do
+                      ShowMessage(Format('%s %d %d', [DateToStr(Date), TelNo, Time]));}
+                    ShowMessage('Before Find');
+                    res := Fin.FindObject (Call);
+                    ShowMessage(Format('CallList.Count: %d, Res: %d, Tel: %d',
+                     [CallList.Count, res, Call.TelNo]));
+                    if res < 0 then
+                    begin
+                         CallList.Add (Call);
+                         ListBox1.Items.Add(TelStr(Call.TelNo));
+                    end;
+               end;
+          end;
+          CallList.Pack;
+          //ListBox1.EndUpdateBounds;
+          StatusBar.SimpleText := 'Importing done';
+     Finally
+          Fin.Free;
+     end;
   end;
 end;
 
@@ -136,10 +189,13 @@ initialization
 
   nGroups := 0;
   CPList := TList.Create;
+  CallList := TCallList.Create;
 
 finalization
 
   CP_Free;
+  //FreeItems (CallList);
+  CallList.Free;
 
 end.
 
