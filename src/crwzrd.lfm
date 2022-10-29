@@ -1,0 +1,62 @@
+object CrWizard: TCrWizard
+  Left = 328
+  Height = 261
+  Top = 149
+  Width = 362
+  HorzScrollBar.Page = 361
+  VertScrollBar.Page = 260
+  ActiveControl = lsGroups
+  Caption = 'CrWizard'
+  ClientHeight = 261
+  ClientWidth = 362
+  object bbOk: TBitBtn
+    Left = 232
+    Height = 25
+    Top = 120
+    Width = 91
+    Caption = '&OK'
+    Kind = bkOK
+    ModalResult = 1
+    NumGlyphs = 0
+    TabOrder = 2
+  end
+  object bbCancel: TBitBtn
+    Left = 232
+    Height = 24
+    Top = 168
+    Width = 91
+    Cancel = True
+    Caption = 'Cancel'
+    Kind = bkCancel
+    ModalResult = 2
+    NumGlyphs = 0
+    TabOrder = 3
+  end
+  object lsGroups: TListBox
+    Left = 16
+    Height = 222
+    Hint = 'List of called parties'
+    Top = 24
+    Width = 170
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 0
+  end
+  object sText: TStaticText
+    Left = 16
+    Height = 16
+    Top = 8
+    Width = 168
+    Caption = 'Called party groups:'
+  end
+  object bbNew: TBitBtn
+    Left = 232
+    Height = 27
+    Top = 24
+    Width = 91
+    Caption = '&New'
+    NumGlyphs = 0
+    OnClick = bbNewClick
+    TabOrder = 1
+  end
+end

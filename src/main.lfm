@@ -1,0 +1,121 @@
+object MainForm: TMainForm
+  Left = 290
+  Height = 332
+  Hint = 'Add to group'
+  Top = 149
+  Width = 580
+  HorzScrollBar.Page = 579
+  VertScrollBar.Page = 307
+  ActiveControl = ListBox1
+  Caption = 'Call Statistics'
+  ClientHeight = 308
+  ClientWidth = 580
+  Menu = MainMenu
+  object lbCallList: TLabel
+    Left = 16
+    Height = 18
+    Top = 24
+    Width = 97
+    Caption = 'Called party list:'
+    ParentColor = False
+  end
+  object lbGroup: TLabel
+    Left = 272
+    Height = 18
+    Top = 26
+    Width = 44
+    Caption = 'Group:'
+    ParentColor = False
+  end
+  object ListBox1: TListBox
+    Left = 16
+    Height = 239
+    Hint = 'Select phone numbers and move them to corresponding group'
+    Top = 39
+    Width = 160
+    MultiSelect = True
+    Sorted = True
+    TabOrder = 0
+  end
+  object ListBox2: TListBox
+    Left = 272
+    Height = 215
+    Hint = 'Move phones here'
+    Top = 64
+    Width = 168
+    Enabled = False
+    MultiSelect = True
+    TabOrder = 1
+  end
+  object btAdd: TButton
+    Left = 200
+    Height = 24
+    Top = 104
+    Width = 49
+    Caption = '>>'
+    Enabled = False
+    OnClick = btAddClick
+    TabOrder = 2
+  end
+  object btRemove: TButton
+    Left = 200
+    Height = 26
+    Hint = 'Remove from group'
+    Top = 192
+    Width = 49
+    Caption = '<<'
+    Enabled = False
+    OnClick = btRemoveClick
+    TabOrder = 3
+  end
+  object btCreate: TButton
+    Left = 448
+    Height = 21
+    Top = 39
+    Width = 80
+    Caption = 'Create new'
+    OnClick = btCreateClick
+    TabOrder = 4
+  end
+  object cobGoupSelector: TComboBox
+    Left = 272
+    Height = 24
+    Hint = 'Select group'
+    Top = 39
+    Width = 168
+    AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
+    ItemHeight = 16
+    OnCloseUp = cobGoupSelectorCloseUp
+    Style = csDropDownList
+    TabOrder = 5
+  end
+  object MainMenu: TMainMenu
+    left = 7
+    object mnFile: TMenuItem
+      Caption = '&File'
+      object mnFileImport: TMenuItem
+        Caption = '&Import'
+        ShortCut = 16457
+        OnClick = mnFileImportClick
+      end
+      object mnSpace1: TMenuItem
+      end
+      object mnExit: TMenuItem
+        Caption = 'E&xit'
+        OnClick = mnExitClick
+      end
+    end
+    object mnHelp: TMenuItem
+      Caption = '&Help'
+      object mnAbout: TMenuItem
+        Caption = 'About'
+        OnClick = mnAboutClick
+      end
+    end
+  end
+  object OpenDialog: TOpenDialog
+    Title = 'Open existing file'
+    Filter = 'Comma Separated Values file (*.csv)|*.csv|All files (*.*)|*.*'
+    left = 64
+  end
+end
