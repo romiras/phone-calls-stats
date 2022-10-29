@@ -185,7 +185,8 @@ begin
   with cobGoupSelector do
   begin
     ShowMessage (Items.Strings[Selection]);
-    //ListBox2.Items := TStringList(CPList.Items[Selection]);
+    ShowMessage (Inttostr(CPList.count));
+    ListBox2.Items := TStringList(CPList.Items[Selection]);
   end;
 end;
 

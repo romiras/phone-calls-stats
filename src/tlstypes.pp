@@ -77,12 +77,17 @@ function GetCategoryName (Cat: TCategory): string;
 function GetCategoryIndex (Ind: byte): TCategory;
 function CompareByTel (Item1 : Pointer; Item2 : Pointer) : Integer;
 function ReadCallList (_Fn: string; var _List: TCallList): integer;
+procedure ImportDB (FileName: string; var S: TStrings; var res: integer);
+procedure CP_Free;
 
 var
-     CallList: TCallList;
+  CallList: TCallList;
+  CPList: TList;  // List of TStrings - used for storage of called party numbers
+  CPItems,        // Called party numbers
+  CPImported: TStringList;  // Called party imported from DB file
 
 Implementation
-Uses SysUtils, TlsConv, impcsv;
+Uses SysUtils, cstypes, TlsConv, impcsv;
 
 function GetCategoryName (Cat: TCategory): string;
 begin
@@ -251,5 +256,60 @@ begin
      else
        Result := Err_Not_Supported;
 end;
+
+procedure ImportDB (FileName: string; var S: TStrings; var res: integer);
+Var
+  Fin: TCallList;
+  Call: TCall;
+  k: integer;
+  stmp: string;
+begin
+     Try
+          Fin := TCallList.Create;
+          
+          res := ReadCallList (FileName, Fin);
+          if res <> No_Errors then
+             Exit;
+
+          for k := 0 to Fin.Count-1 do
+          begin
+               Call := TCall (Fin[k]);
+               if Assigned (Call) then
+               begin
+                    CallList.Add (Call);
+                    stmp := TelStr(Call.TelNo);
+                    with S do
+                    if IndexOf(stmp) < 0 then
+                       Add(stmp); // Add non-duplicate phone numbers
+               end;
+          end;
+          CallList.Pack;
+     Finally
+          Fin.Free;
+     end;
+end;
+
+procedure CP_Free;
+var
+  i: integer;
+begin
+  for i := 0 to CPList.Count-1 do
+      TStringList(CPList.Items[i]).Free;
+  CPList.Free;
+end;
+
+
+initialization
+
+  CPList := TList.Create;
+  CallList := TCallList.Create;
+  CPImported := TStringList.Create;
+
+finalization
+
+  CPImported.Free;
+  //FreeItems (CallList);
+  CallList.Free;
+  CP_Free;
 
 end.

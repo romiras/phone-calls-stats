@@ -1,0 +1,285 @@
+object WizardForm: TWizardForm
+  Left = 260
+  Height = 433
+  Top = 146
+  Width = 655
+  HorzScrollBar.Page = 654
+  VertScrollBar.Page = 432
+  ActiveControl = bbNext
+  Caption = 'Call Statistcs Wizard'
+  ClientHeight = 433
+  ClientWidth = 655
+  OnCreate = FormCreate
+  Position = poScreenCenter
+  object pcWizard: TPageControl
+    Left = 16
+    Height = 376
+    Width = 624
+    ActivePage = tsCreateGrp
+    TabIndex = 2
+    TabOrder = 0
+    object tsWelcome: TTabSheet
+      Caption = 'Welcome'
+      object lbWelcome: TLabel
+        Left = 20
+        Height = 24
+        Top = 26
+        Width = 108
+        Caption = 'Get started'
+        Font.CharSet = 14
+        Font.Height = -19
+        Font.Style = [fsBold]
+        ParentColor = False
+      end
+      object Memo1: TMemo
+        Left = 268
+        Height = 224
+        Top = 74
+        Width = 312
+        Lines.Strings = (
+          ''
+          'Steps for gathering call statistics:'
+          ''
+          '1. Importing database from file, containing information '
+          'about date&time of call, phone number and call '
+          'duration.'
+          ''
+          '2. Creating groups of called party.'
+          ''
+          '3. Classifying called party by newly created groups.'
+          ''
+          '4. Getting statistics and displaying charts.'
+        )
+        TabOrder = 0
+      end
+    end
+    object tsImport: TTabSheet
+      Caption = 'Import'
+      ClientHeight = 350
+      ClientWidth = 616
+      object Label1: TLabel
+        Left = 20
+        Height = 24
+        Top = 26
+        Width = 146
+        Caption = 'Importing data'
+        Font.Height = -19
+        Font.Style = [fsBold]
+        ParentColor = False
+      end
+      object lbStep1: TLabel
+        Left = 20
+        Height = 20
+        Top = 9
+        Width = 85
+        Caption = 'Step 1 of 4:'
+        Font.Height = -16
+        ParentColor = False
+      end
+      object lbImported: TLabel
+        Left = 21
+        Height = 14
+        Top = 109
+        Width = 74
+        Caption = 'Imported data:'
+        ParentColor = False
+      end
+      object Bevel1: TBevel
+        Left = 240
+        Height = 192
+        Top = 130
+        Width = 359
+      end
+      object lbStatus: TLabel
+        Left = 252
+        Height = 16
+        Top = 146
+        Width = 248
+        AutoSize = False
+        Caption = 'No data imported yet'
+        ParentColor = False
+      end
+      object edPath: TEdit
+        Left = 20
+        Height = 24
+        Top = 71
+        Width = 456
+        TabOrder = 0
+      end
+      object bbBrowse: TBitBtn
+        Left = 496
+        Height = 26
+        Top = 71
+        Width = 103
+        Caption = 'B&rowse'
+        NumGlyphs = 0
+        OnClick = bbBrowseClick
+        TabOrder = 1
+      end
+      object lboImported: TListBox
+        Left = 20
+        Height = 192
+        Top = 130
+        Width = 184
+        TabOrder = 2
+      end
+    end
+    object tsCreateGrp: TTabSheet
+      Caption = 'Create Groups'
+      ClientHeight = 350
+      ClientWidth = 616
+      object lbStep2: TLabel
+        Left = 20
+        Height = 20
+        Top = 9
+        Width = 85
+        Caption = 'Step 2 of 4:'
+        Font.Height = -16
+        ParentColor = False
+      end
+      object Label2: TLabel
+        Left = 20
+        Height = 24
+        Top = 26
+        Width = 179
+        Caption = 'Creation of groups'
+        Font.Height = -19
+        Font.Style = [fsBold]
+        ParentColor = False
+      end
+      object Bevel2: TBevel
+        Left = 240
+        Height = 192
+        Top = 130
+        Width = 359
+      end
+      object lboGroups: TListBox
+        Left = 20
+        Height = 232
+        Top = 90
+        Width = 184
+        TabOrder = 0
+      end
+      object bbNew: TBitBtn
+        Left = 240
+        Height = 30
+        Top = 90
+        Width = 105
+        Caption = '&Add'
+        Default = True
+        NumGlyphs = 0
+        OnClick = bbNewClick
+        TabOrder = 1
+      end
+    end
+    object tsClassify: TTabSheet
+      Caption = 'Classify'
+      object lbStep3: TLabel
+        Left = 20
+        Height = 20
+        Top = 9
+        Width = 85
+        Caption = 'Step 3 of 4:'
+        Font.Height = -16
+        ParentColor = False
+      end
+      object Label3: TLabel
+        Left = 20
+        Height = 24
+        Top = 26
+        Width = 129
+        Caption = 'Classification'
+        Font.Height = -19
+        Font.Style = [fsBold]
+        ParentColor = False
+      end
+      object lboCPall: TListBox
+        Left = 60
+        Height = 224
+        Top = 90
+        Width = 175
+        MultiSelect = True
+        TabOrder = 0
+      end
+      object lboCPgroup: TListBox
+        Left = 368
+        Height = 198
+        Top = 115
+        Width = 175
+        MultiSelect = True
+        TabOrder = 1
+      end
+      object bbAdd: TBitBtn
+        Left = 264
+        Height = 28
+        Top = 162
+        Width = 79
+        Caption = '&Add >'
+        NumGlyphs = 0
+        OnClick = bbAddClick
+        TabOrder = 2
+      end
+      object bbRemove: TBitBtn
+        Left = 264
+        Height = 28
+        Top = 228
+        Width = 79
+        Caption = '< &Remove'
+        NumGlyphs = 0
+        OnClick = bbRemoveClick
+        TabOrder = 3
+      end
+      object cobGoupSelector: TComboBox
+        Left = 368
+        Height = 21
+        Top = 90
+        Width = 175
+        AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
+        ItemHeight = 13
+        OnCloseUp = cobGoupSelectorCloseUp
+        Style = csDropDownList
+        TabOrder = 4
+      end
+    end
+  end
+  object bbPrev: TBitBtn
+    Left = 209
+    Height = 35
+    Top = 392
+    Width = 120
+    Caption = '< &Back'
+    Enabled = False
+    NumGlyphs = 0
+    OnClick = bbPrevClick
+    TabOrder = 1
+  end
+  object bbNext: TBitBtn
+    Left = 352
+    Height = 35
+    Top = 392
+    Width = 120
+    Caption = '&Next >'
+    ModalResult = 1
+    NumGlyphs = 0
+    OnClick = bbNextClick
+    TabOrder = 2
+  end
+  object bbCancel: TBitBtn
+    Left = 520
+    Height = 35
+    Top = 392
+    Width = 120
+    Cancel = True
+    Caption = 'Cancel'
+    Kind = bkCancel
+    ModalResult = 2
+    NumGlyphs = 0
+    TabOrder = 3
+  end
+  object OpenDialog: TOpenDialog
+    Title = 'Open existing file'
+    Filter = 'Comma Separated Values file (*.csv)|*.csv|All files (*.*)|*.*'
+    left = 32
+    top = 384
+  end
+end
