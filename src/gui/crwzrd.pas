@@ -30,6 +30,8 @@ var
 
 implementation
 
+uses cstypes;
+
 { TCrWizard }
 
 procedure TCrWizard.bbNewClick(Sender: TObject);
@@ -37,9 +39,13 @@ var
   grpName: string;
 begin
   grpName := InputBox('Group name:', 'Type group name here:', 'new group');
-  ShowMessage ('"'+grpName+'"');
   if grpName <> '' then
-     lsGroups.Items.Add(grpName);
+  begin
+    lsGroups.Items.Add(grpName);
+    CPItems := TStringList.Create;
+    CPList.Add(CPItems);
+//    inc (nGroups);
+  end;
 end;
 
 initialization

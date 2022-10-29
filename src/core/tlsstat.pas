@@ -5,7 +5,7 @@ interface
 uses Classes, TlsTypes;
 
 var
-     BondList: TBondList;
+     BondList: TList;
 
 
      CatHistTimes,
@@ -19,29 +19,29 @@ var
      SomeTel: Cardinal;
 
 
-procedure InitTelStatistics (Phone: string);
+procedure InitTelStatistics (_Tel: Cardinal);
 procedure InitCatStatistics (Fn: string);
 
 procedure GetTelStatistics (List: TCallList);
-procedure GetCatStatistics (List: TBondList);
+procedure GetCatStatistics (List: TCallList);
 
 procedure ShowTelStatistics (List: TCallList);
-procedure ShowCatStatistics (List: TBondList);
+procedure ShowCatStatistics (List: TCallList);
 
 procedure EndCatStatistics;
 
 implementation
-uses SysUtils, DateUtils, tlsconv;
+uses SysUtils, DateUtils, TlsFunc, tlscatrd;
 
 var
      dDate: TDateTime;
 
-procedure InitTelStatistics (Phone: string);
+procedure InitTelStatistics (_Tel: Cardinal);
 begin
      days := 0;
      dDate := 0.0;
 
-     SomeTel := DigiTel (Phone);
+     SomeTel := _Tel;
      CallsTo := 0;
      MaxCallDuration := 0;
      TotalCallsDurationTo := 0;
@@ -52,8 +52,9 @@ begin
      days := 0;
      dDate := 0.0;
 
-     BondList.LoadFromFile (Fn);
+     BondList := ReadBonds (Fn);
      BondList.Pack;
+     BondList.Sort (@CompareByTel);
      //ShowBondList (BondList);
 
      FillChar (CatHistCalls, SizeOf(CatMaxTimes), 0);
@@ -89,7 +90,7 @@ begin
      );
 end;
 
-procedure GetCatStatistics (List: TBondList);
+procedure GetCatStatistics (List: TCallList);
 var
      k, iobj: integer;
      cat: TCategory;
@@ -103,7 +104,8 @@ begin
                inc(days);
           end;
 
-          iobj := BondList.FindObject (TCall(List[k]));
+          //, TelNo
+          iobj := List.FindObject (BondList);
           if iobj >= 0 then
                cat := TBond(BondList[iobj]).Category
           else
@@ -168,7 +170,7 @@ begin
       [MaxCallDuration/60.0]));
 end;
 
-procedure ShowCatStatistics (List: TBondList);
+procedure ShowCatStatistics (List: TCallList);
 begin
      writeln;
      writeln (Format ('%d days of calls brutto of %d days total',

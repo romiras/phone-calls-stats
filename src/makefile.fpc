@@ -1,0 +1,9 @@
+
+[compiler]
+unitdir=core cui gui import
+includedir=core cui gui import
+targetdir=../bin
+
+[target]
+#dirs=import
+programs=callstat plgtest csvimp

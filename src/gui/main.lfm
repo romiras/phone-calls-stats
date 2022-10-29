@@ -34,6 +34,7 @@ object MainForm: TMainForm
     Top = 39
     Width = 160
     MultiSelect = True
+    OnDblClick = ListBox1DblClick
     Sorted = True
     TabOrder = 0
   end

@@ -1,6 +1,8 @@
-{$mode objfpc}
- 
-Unit TlsConv;
+{$IFDEF FPC}
+  {$mode objfpc}
+{$ENDIF}
+
+Unit TlsFunc;
 
 Interface
 

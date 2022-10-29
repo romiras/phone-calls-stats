@@ -9,7 +9,7 @@ uses Classes;
 function ReadBonds (fn: string): TList;
 
 implementation
-uses IniFiles, tlstypes,tlsconv;
+uses IniFiles, tlstypes,tlsfunc;
 
 function ReadBonds (fn: string): TList;
 var

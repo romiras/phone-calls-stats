@@ -1,4 +1,10 @@
-{$mode objfpc}
+{$IFDEF FPC}
+  {$mode objfpc}
+{$ENDIF}
+
+{$IFDEF LCL}
+ {$DEFINE GUI}
+{$ENDIF}
 
 Unit TlStypes;
 
@@ -16,7 +22,11 @@ const
 Type
      TCategory = (Alliance,Friends,Work,Others);
      TCatHist = array [TCategory] of word;
-     
+
+     {$IFNDEF FPC}
+     LongWord = Cardinal;
+     {$ENDIF}
+
      TBond = class
        TelNo: LongWord;
        Category: TCategory;
@@ -63,8 +73,9 @@ Type
         // The index returned, ranges from 0 to Count-1
         // A value of -1 indicates that no Item was found
         function FindObject(Item : Pointer) : Integer;
+        function FindObjectByTelNo (No: LongWord) : Integer;
      end;
-     
+
      TCallList = class (TListSorted)
      public
         function Compare(Item1, Item2: Pointer): Integer; override;
@@ -83,9 +94,7 @@ Type
 procedure FreeItems (myList: TList);
 function GetCategoryName (Cat: TCategory): string;
 function GetCategoryIndex (Ind: byte): TCategory;
-//function CompareByTel (Item1 : Pointer; Item2 : Pointer) : Integer;
-function ReadCallList (_Fn: string; var _List: TCallList): integer;
-procedure ImportDB (FileName: string; var S: TStrings; var res: integer);
+function CompareByTel (Item1 : Pointer; Item2 : Pointer) : Integer;
 procedure CP_Free;
 
 var
@@ -95,7 +104,7 @@ var
   CPImported: TStringList;  // Called party imported from DB file
 
 Implementation
-Uses SysUtils, IniFiles, TlsConv, impcsv;
+Uses SysUtils, IniFiles, TlsFunc;
 
 function GetCategoryName (Cat: TCategory): string;
 begin
@@ -138,7 +147,7 @@ begin
      Self.Time := wTime;
 end;
 
-{function CompareByTel (Item1 : Pointer; Item2 : Pointer) : Integer;
+function CompareByTel (Item1 : Pointer; Item2 : Pointer) : Integer;
 var
   TBond1, TBond2 : TBond;
 begin
@@ -152,7 +161,7 @@ begin
      Result := 0
   else
      Result := -1;
-end;}
+end;
 
 constructor TListSorted.Create;
 
@@ -190,6 +199,19 @@ begin
    Add := nResult;
 end;
 
+
+function TCallList.Compare (Item1, Item2: Pointer): Integer;
+begin
+  if TCall(Item1).TelNo > TCall(Item2).TelNo then
+     Result := 1
+  else
+  if TCall(Item1).TelNo < TCall(Item2).TelNo then
+     Result := -1
+  else
+     Result := 0;
+end;
+
+
 function TListSorted.FindObject(Item : Pointer) : Integer;
 // Find the object using the compare method and
 // a binary chop search
@@ -220,16 +242,15 @@ begin
    FindObject := nResult;
 end;
 
-function TCallList.Compare (Item1, Item2: Pointer): Integer;
+
+function TListSorted.FindObjectByTelNo (No: LongWord) : Integer;
+var C: TCall;
 begin
-  if TCall(Item1).TelNo > TCall(Item2).TelNo then
-     Result := 1
-  else
-  if TCall(Item1).TelNo = TCall(Item2).TelNo then
-     Result := 0
-  else
-     Result := -1;
+    C := TCall.Create (TDateTime(0), No, 0);
+    result := FindObject (C);
+    C.Free;
 end;
+
 
 function TBondList.Compare (Item1, Item2: Pointer): Integer;
 begin
@@ -261,10 +282,10 @@ begin
     begin
          Ini.ReadSectionValues (Sections[k], Values);
          {$IFDEF DEBUG}
-         {$IFNDEF LCL}
+         {$IFNDEF GUI}
          writeln;
          writeln (Values.Count, ' read');
-         {$ENDIF LCL}
+         {$ENDIF GUI}
          {$ENDIF DEBUG}
          for i := 0 to Pred (Values.Count) do
          begin
@@ -273,9 +294,9 @@ begin
             Bond := TBond.Create (tel, GetCategoryIndex (Succ(k)));
             Self.Add (Bond);
          {$IFDEF DEBUG}
-         {$IFNDEF LCL}
+         {$IFNDEF GUI}
             writeln (tel);
-         {$ENDIF LCL}
+         {$ENDIF GUI}
          {$ENDIF DEBUG}
          end;
          Values.Clear;
@@ -295,63 +316,6 @@ begin
           TObject (myList[i]).Free;
 end;
 
-{procedure TCallList.LoadFromFile (FileName: string);
-var
-  res: integer;
-begin
-  //AbstractError
-  res := ReadCallList (FileName, fList);
-end;}
-
-function ReadCallList (_Fn: string; var _List: TCallList): integer;
-var
-  Ext: string;
-//  Func: ImportFunc;
-begin
-     Result := Err_Unknown;
-     Ext := LowerCase (ExtractFileExt (_Fn));
-
-     if Ext = '.csv' then
-     begin
-//       Func := @ReadCSV;
-//       Result := Func (_Fn, _List);
-       Result := ReadCSV (_Fn, _List);
-     end
-     else
-       Result := Err_Not_Supported;
-end;
-
-procedure ImportDB (FileName: string; var S: TStrings; var res: integer);
-Var
-  Fin: TCallList;
-  Call: TCall;
-  k: integer;
-  stmp: string;
-begin
-     Try
-          Fin := TCallList.Create;
-          
-          res := ReadCallList (FileName, Fin);
-          if res <> No_Errors then
-             Exit;
-
-          for k := 0 to Fin.Count-1 do
-          begin
-               Call := TCall (Fin[k]);
-               if Assigned (Call) then
-               begin
-                    CallList.Add (Call);
-                    stmp := TelStr(Call.TelNo);
-                    with S do
-                    if IndexOf(stmp) < 0 then
-                       Add(stmp); // Add non-duplicate phone numbers
-               end;
-          end;
-          CallList.Pack;
-     Finally
-          Fin.Free;
-     end;
-end;
 
 procedure CP_Free;
 var

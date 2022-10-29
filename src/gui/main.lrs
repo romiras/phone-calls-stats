@@ -1,0 +1,38 @@
+{ This is an automatically generated lazarus resource file }
+
+LazarusResources.Add('TMainForm','FORMDATA',[
+  'TPF0'#9'TMainForm'#8'MainForm'#4'Left'#3'"'#1#6'Height'#3'L'#1#4'Hint'#6#12
+  +'Add to group'#3'Top'#3#149#0#5'Width'#3'D'#2#18'HorzScrollBar.Page'#3'C'#2
+  +#18'VertScrollBar.Page'#3'7'#1#13'ActiveControl'#7#8'ListBox1'#7'Caption'#6
+  +#15'Call Statistics'#12'ClientHeight'#3'8'#1#11'ClientWidth'#3'D'#2#4'Menu'#7
+  +#8'MainMenu'#0#6'TLabel'#10'lbCallList'#4'Left'#2#16#6'Height'#2#14#3'Top'#2
+  +#24#5'Width'#2'O'#7'Caption'#6#18'Called party list:'#11'ParentColor'#8#0#0#6
+  +'TLabel'#7'lbGroup'#4'Left'#3#16#1#6'Height'#2#14#3'Top'#2#26#5'Width'#2'"'#7
+  +'Caption'#6#6'Group:'#11'ParentColor'#8#0#0#8'TListBox'#8'ListBox1'#4'Left'#2
+  +#16#6'Height'#3#239#0#4'Hint'#6'9Select phone numbers and move them to corre'
+  +'sponding group'#3'Top'#2''''#5'Width'#3#160#0#11'MultiSelect'#9#10'OnDblCli'
+  +'ck'#7#16'ListBox1DblClick'#6'Sorted'#9#8'TabOrder'#2#0#0#0#8'TListBox'#8'Li'
+  +'stBox2'#4'Left'#3#16#1#6'Height'#3#215#0#4'Hint'#6#16'Move phones here'#3'T'
+  +'op'#2'@'#5'Width'#3#168#0#7'Enabled'#8#11'MultiSelect'#9#8'TabOrder'#2#1#0#0
+  +#7'TButton'#5'btAdd'#4'Left'#3#200#0#6'Height'#2#24#3'Top'#2'h'#5'Width'#2'1'
+  +#7'Caption'#6#2'>>'#7'Enabled'#8#7'OnClick'#7#10'btAddClick'#8'TabOrder'#2#2
+  +#0#0#7'TButton'#8'btRemove'#4'Left'#3#200#0#6'Height'#2#26#4'Hint'#6#17'Remo'
+  +'ve from group'#3'Top'#3#192#0#5'Width'#2'1'#7'Caption'#6#2'<<'#7'Enabled'#8
+  +#7'OnClick'#7#13'btRemoveClick'#8'TabOrder'#2#3#0#0#7'TButton'#8'btCreate'#4
+  +'Left'#3#192#1#6'Height'#2#21#3'Top'#2''''#5'Width'#2'P'#7'Caption'#6#10'Cre'
+  +'ate new'#7'OnClick'#7#13'btCreateClick'#8'TabOrder'#2#5#0#0#9'TComboBox'#15
+  +'cobGoupSelector'#4'Left'#3#16#1#6'Height'#2#21#4'Hint'#6#12'Select group'#3
+  +'Top'#2''''#5'Width'#3#168#0#16'AutoCompleteText'#11#22'cbactEndOfLineComple'
+  +'te'#20'cbactSearchAscending'#0#10'ItemHeight'#2#13#9'OnCloseUp'#7#22'cobGou'
+  +'pSelectorCloseUp'#5'Style'#7#14'csDropDownList'#8'TabOrder'#2#4#0#0#10'TSta'
+  +'tusBar'#9'StatusBar'#6'Height'#2#20#3'Top'#3'$'#1#5'Width'#3'D'#2#6'Panels'
+  +#14#0#0#0#9'TMainMenu'#8'MainMenu'#4'left'#2#7#0#9'TMenuItem'#6'mnFile'#7'Ca'
+  +'ption'#6#5'&File'#0#9'TMenuItem'#12'mnFileImport'#7'Caption'#6#7'&Import'#8
+  +'ShortCut'#3'I@'#7'OnClick'#7#17'mnFileImportClick'#0#0#9'TMenuItem'#8'mnSpa'
+  +'ce1'#0#0#9'TMenuItem'#6'mnExit'#7'Caption'#6#5'E&xit'#7'OnClick'#7#11'mnExi'
+  +'tClick'#0#0#0#9'TMenuItem'#6'mnHelp'#7'Caption'#6#5'&Help'#0#9'TMenuItem'#7
+  +'mnAbout'#7'Caption'#6#5'About'#7'OnClick'#7#12'mnAboutClick'#0#0#0#0#11'TOp'
+  +'enDialog'#10'OpenDialog'#5'Title'#6#18'Open existing file'#6'Filter'#6'=Com'
+  +'ma Separated Values file (*.csv)|*.csv|All files (*.*)|*.*'#4'left'#2'@'#0#0
+  +#0
+]);

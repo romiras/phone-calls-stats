@@ -34,6 +34,7 @@ type
     procedure btRemoveClick(Sender: TObject);
     procedure btCreateClick(Sender: TObject);
     procedure cobGoupSelectorCloseUp(Sender: TObject);
+    procedure ListBox1DblClick(Sender: TObject);
     procedure mnAboutClick(Sender: TObject);
     procedure mnExitClick(Sender: TObject);
     procedure mnFileImportClick(Sender: TObject);
@@ -95,25 +96,16 @@ begin
                exit;
           end;
           
-          //ShowMessage(IntToStr(CallList.Count));
           for k := 0 to Fin.Count-1 do
           begin
-               //ShowMessage(inttostr(k));
                Call := TCall (Fin[k]);
                if Assigned (Call) then
                begin
-                    {with Call do
-                      ShowMessage(Format('%s %d %d', [DateToStr(Date), TelNo, Time]));}
                     CallList.Add (Call);
-                    //res := Fin.FindObject (Call);
-                    //ShowMessage(Format('CallList.Count: %d, Res: %d, Tel: %d',
-                    // [CallList.Count, res, Call.TelNo]));
-
                     stmp := TelStr(Call.TelNo);
-                    if ListBox1.Items.IndexOf(stmp) < 0 then
-                    begin
-                         ListBox1.Items.Add(stmp);
-                    end;
+                    with ListBox1.Items do
+                    if IndexOf(stmp) < 0 then
+                       Add(stmp);
                end;
           end;
           CallList.Pack;
@@ -155,15 +147,6 @@ begin
   end;
 end;
 
-procedure CP_Free;
-var
-  i: integer;
-begin
-  for i := 0 to nGroups-1 do
-      TStringList(CPList.Items[i]).Free;
-  CPList.Free;
-end;
-
 procedure TMainForm.btCreateClick(Sender: TObject);
 begin
   if CrWizard.ShowModal = mrOk then
@@ -171,10 +154,7 @@ begin
     ListBox2.Enabled:=True;
     btAdd.Enabled:=True;
     btRemove.Enabled:=True;
-    inc (nGroups);
     cobGoupSelector.Items.AddStrings(CrWizard.lsGroups.Items);
-    CPItems := TStringList.Create;
-    CPList.Add(CPItems);
   end;
 end;
 
@@ -182,26 +162,17 @@ procedure TMainForm.cobGoupSelectorCloseUp(Sender: TObject);
 begin
   Selection := cobGoupSelector.ItemIndex;
   if Selection >= 0 then
-  with cobGoupSelector do
-  begin
-    ShowMessage (Items.Strings[Selection]);
-    ShowMessage (Inttostr(CPList.count));
     ListBox2.Items := TStringList(CPList.Items[Selection]);
-  end;
+end;
+
+procedure TMainForm.ListBox1DblClick(Sender: TObject);
+begin
+  if ListBox2.Enabled then
+     btAddClick(Sender)
 end;
 
 initialization
   {$I main.lrs}
-
-  nGroups := 0;
-  CPList := TList.Create;
-  CallList := TCallList.Create;
-
-finalization
-
-  CP_Free;
-  //FreeItems (CallList);
-  CallList.Free;
 
 end.
 
