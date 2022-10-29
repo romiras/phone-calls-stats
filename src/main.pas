@@ -104,20 +104,21 @@ begin
                begin
                     {with Call do
                       ShowMessage(Format('%s %d %d', [DateToStr(Date), TelNo, Time]));}
-                    ShowMessage('Before Find');
-                    res := Fin.FindObject (Call);
-                    ShowMessage(Format('CallList.Count: %d, Res: %d, Tel: %d',
-                     [CallList.Count, res, Call.TelNo]));
-                    if res < 0 then
+                    CallList.Add (Call);
+                    //res := Fin.FindObject (Call);
+                    //ShowMessage(Format('CallList.Count: %d, Res: %d, Tel: %d',
+                    // [CallList.Count, res, Call.TelNo]));
+
+                    stmp := TelStr(Call.TelNo);
+                    if ListBox1.Items.IndexOf(stmp) < 0 then
                     begin
-                         CallList.Add (Call);
-                         ListBox1.Items.Add(TelStr(Call.TelNo));
+                         ListBox1.Items.Add(stmp);
                     end;
                end;
           end;
           CallList.Pack;
           //ListBox1.EndUpdateBounds;
-          StatusBar.SimpleText := 'Importing done';
+          StatusBar.SimpleText := Format ('Importing done. Total %d phone numbers.' ,[ListBox1.Items.Count]);
      Finally
           Fin.Free;
      end;
@@ -181,7 +182,11 @@ procedure TMainForm.cobGoupSelectorCloseUp(Sender: TObject);
 begin
   Selection := cobGoupSelector.ItemIndex;
   if Selection >= 0 then
-     ListBox2.Items := TStringList(CPList.Items[Selection]);
+  with cobGoupSelector do
+  begin
+    ShowMessage (Items.Strings[Selection]);
+    //ListBox2.Items := TStringList(CPList.Items[Selection]);
+  end;
 end;
 
 initialization

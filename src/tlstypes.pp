@@ -67,7 +67,7 @@ Type
      
      TCallList = class (TListSorted)
      public
-        function Compare(Item1, Item2: Pointer): Integer; overload;
+        function Compare(Item1, Item2: Pointer): Integer; override;
      end;
 
      ImportFunc = function (_FilePath: string; var _List: TCallList): integer;
