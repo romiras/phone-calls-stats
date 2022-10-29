@@ -27,19 +27,26 @@ type
     Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
-    lbStatus: TLabel;
+    Label4: TLabel;
+    Label42: TLabel;
+    lbStatus1: TLabel;
     lbImported: TLabel;
     lboGroups: TListBox;
+    lbStatus2: TLabel;
     lbStep1: TLabel;
     lbStep2: TLabel;
     lbStep3: TLabel;
+    lbStep4: TLabel;
     lbWelcome: TLabel;
     lboImported: TListBox;
     lboCPall: TListBox;
     lboCPgroup: TListBox;
+    lboPhones: TListBox;
     Memo1: TMemo;
     OpenDialog: TOpenDialog;
     pcWizard: TPageControl;
+    rgType: TRadioGroup;
+    tsSelect: TTabSheet;
     tsCreateGrp: TTabSheet;
     tsClassify: TTabSheet;
     tsImport: TTabSheet;
@@ -53,6 +60,7 @@ type
     procedure cobGoupSelectorCloseUp(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     function CheckStep (Step: integer): boolean;
+    procedure rgTypeClick(Sender: TObject);
   private
     { private declarations }
   public
@@ -64,7 +72,7 @@ var
 
 implementation
 
-uses TlsTypes;
+uses TlsTypes, TlsStat;
 
 var
    Selection: integer; // cobGoupSelector.ItemIndex
@@ -99,18 +107,53 @@ begin
          end;
       2: begin
            cobGoupSelector.Items.AddStrings(lboGroups.Items);
-           if
+           if lboGroups.Count = 0 then
+           begin
+              ShowMessage ('At least one group need to be created for classification!');
+              Result := False;
+           end;
+         end;
+{      3: begin
+           if  then
+           begin
+              ShowMessage ('');
+              Result := False;
+           end;
+         end;
+}
+      4: begin
+           if lboPhones.ItemIndex < 0 then
+           begin
+              ShowMessage ('Select a phone number you want to get statistics about.');
+              Result := False;
+           end;
          end;
       else
         Result := True;
      end;
 end;
 
+procedure TWizardForm.rgTypeClick(Sender: TObject);
+var
+  TelNumber: string;
+begin
+  case rgType.ItemIndex of
+   0: // By Groups
+    begin
+    end;
+   1: // By Phone
+    begin
+         TelNumber := lboPhones.Items.Strings[lboPhones.ItemIndex];
+         InitTelStatistics (TelNumber);
+    end;
+  end;
+end;
+
 procedure TWizardForm.bbNextClick(Sender: TObject);
 begin
      with pcWizard do
      begin
-          if ActivePageIndex = Pred (PageCount) then
+          if ActivePageIndex = PageCount - 1 then
           begin
                { Save settings and exit from Wizard }
                { ... }
@@ -122,7 +165,7 @@ begin
           else
              Exit;
 
-          if ActivePageIndex = Pred (PageCount) then
+          if ActivePageIndex = PageCount -1 then
           begin
                bbNext.Caption := 'Finish';
                //bbCancel.Enabled := false;
@@ -166,7 +209,7 @@ begin
      lboImported.Items.Assign(CPImported);
      //lboImported.EndUpdateBounds;
      //StatusBar.SimpleText := Format ('Importing done. Total %d phone numbers.' ,[lboImported.Items.Count]);
-     lbStatus.Caption := Format ('Importing done. Total %d phone numbers.' ,[lboImported.Items.Count]);
+     lbStatus1.Caption := Format ('Importing done. Total %d phone numbers.' ,[lboImported.Items.Count]);
   end;
 end;
 
@@ -180,6 +223,7 @@ begin
     lboGroups.Items.Add(grpName);
     CPItems := TStringList.Create;
     CPList.Add(CPItems);
+    lbStatus2.Caption := Format ('%d groups.' ,[lboGroups.Count]);
   end;
 end;
 
@@ -233,7 +277,11 @@ procedure TWizardForm.cobGoupSelectorCloseUp(Sender: TObject);
 begin
   Selection := cobGoupSelector.ItemIndex;
   if Selection >= 0 then
+  begin
     lboCPgroup.Items := TStringList(CPList.Items[Selection]);
+    bbAdd.Enabled := True;
+    bbRemove.Enabled := True;
+  end;
 end;
 
 initialization

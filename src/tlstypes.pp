@@ -18,16 +18,16 @@ Type
      TCatHist = array [TCategory] of word;
      
      TBond = class
-       TelNo: Cardinal;
+       TelNo: LongWord;
        Category: TCategory;
        constructor Create (Tel: string; Cat: TCategory);
      end;
 
      TCall = class (TObject)
        Date: TDateTime;
-       TelNo: Cardinal;
+       TelNo: LongWord;
        Time: word;
-       constructor Create (dDate: TDateTime; cTelNo: Cardinal; wTime: word);
+       constructor Create (dDate: TDateTime; cTelNo: LongWord; wTime: word);
      end;
 
 {     TCallList = class (TList)
@@ -68,6 +68,14 @@ Type
      TCallList = class (TListSorted)
      public
         function Compare(Item1, Item2: Pointer): Integer; override;
+        procedure InitStatistics (Phone: string); virtual; abstract;
+        procedure LoadFromFile (fn: string); virtual; abstract;
+     end;
+
+     TBondList = class (TListSorted)
+     public
+        function Compare(Item1, Item2: Pointer): Integer; override;
+        procedure LoadFromFile (fn: string);
      end;
 
      ImportFunc = function (_FilePath: string; var _List: TCallList): integer;
@@ -75,7 +83,7 @@ Type
 procedure FreeItems (myList: TList);
 function GetCategoryName (Cat: TCategory): string;
 function GetCategoryIndex (Ind: byte): TCategory;
-function CompareByTel (Item1 : Pointer; Item2 : Pointer) : Integer;
+//function CompareByTel (Item1 : Pointer; Item2 : Pointer) : Integer;
 function ReadCallList (_Fn: string; var _List: TCallList): integer;
 procedure ImportDB (FileName: string; var S: TStrings; var res: integer);
 procedure CP_Free;
@@ -87,7 +95,7 @@ var
   CPImported: TStringList;  // Called party imported from DB file
 
 Implementation
-Uses SysUtils, cstypes, TlsConv, impcsv;
+Uses SysUtils, IniFiles, TlsConv, impcsv;
 
 function GetCategoryName (Cat: TCategory): string;
 begin
@@ -123,14 +131,14 @@ begin
      Self.Category := Cat;
 end;
 
-constructor TCall.Create (dDate: TDateTime; cTelNo: Cardinal; wTime: word);
+constructor TCall.Create (dDate: TDateTime; cTelNo: LongWord; wTime: word);
 begin
      Self.Date := dDate;
      Self.TelNo := cTelNo;
      Self.Time := wTime;
 end;
 
-function CompareByTel (Item1 : Pointer; Item2 : Pointer) : Integer;
+{function CompareByTel (Item1 : Pointer; Item2 : Pointer) : Integer;
 var
   TBond1, TBond2 : TBond;
 begin
@@ -144,7 +152,7 @@ begin
      Result := 0
   else
      Result := -1;
-end;
+end;}
 
 constructor TListSorted.Create;
 
@@ -221,6 +229,62 @@ begin
      Result := 0
   else
      Result := -1;
+end;
+
+function TBondList.Compare (Item1, Item2: Pointer): Integer;
+begin
+  if TBond(Item1).TelNo > TBond(Item2).TelNo then
+     Result := 1
+  else
+  if TBond(Item1).TelNo = TBond(Item2).TelNo then
+     Result := 0
+  else
+     Result := -1;
+end;
+
+procedure TBondList.LoadFromFile (fn: string);
+var
+  Bond: TBond;
+  Ini : TIniFile;
+  Sections, Values: TStringList;
+  tel: string[12];
+  k, i: integer;
+begin
+  Ini := TIniFile.Create (fn);
+  Sections := TStringList.Create;
+
+  Try
+    Ini.ReadSections (Sections);
+    Values := TStringList.Create;
+
+    for k := 0 to Pred (Sections.Count) do
+    begin
+         Ini.ReadSectionValues (Sections[k], Values);
+         {$IFDEF DEBUG}
+         {$IFNDEF LCL}
+         writeln;
+         writeln (Values.Count, ' read');
+         {$ENDIF LCL}
+         {$ENDIF DEBUG}
+         for i := 0 to Pred (Values.Count) do
+         begin
+            tel := Values[i];
+            System.delete (tel, 1, 1); { delete first '=' }
+            Bond := TBond.Create (tel, GetCategoryIndex (Succ(k)));
+            Self.Add (Bond);
+         {$IFDEF DEBUG}
+         {$IFNDEF LCL}
+            writeln (tel);
+         {$ENDIF LCL}
+         {$ENDIF DEBUG}
+         end;
+         Values.Clear;
+    end;
+  Finally
+    Values.Free;
+    Sections.Free;
+    Ini.Free;
+  end;
 end;
 
 procedure FreeItems (myList: TList);

@@ -71,16 +71,14 @@ var
      Call: TCall;
      k: word;
 begin
-     List := Nil;
-
      Try
-          Fin := TStringList.Create;
-          if Not Assigned (Fin) then
+          if Not Assigned (List) then
           begin
                Result := Err_Alloc;
                exit;
           end;
-          List := TCallList.Create;
+
+          Fin := TStringList.Create;
           if Not Assigned (Fin) then
           begin
                Result := Err_Alloc;

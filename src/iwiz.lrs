@@ -1,52 +1,95 @@
 { This is an automatically generated lazarus resource file }
 
 LazarusResources.Add('TWizardForm','FORMDATA',[
-  'TPF0'#11'TWizardForm'#10'WizardForm'#4'Left'#3#4#1#6'Height'#3#169#1#3'Top'#3
+  'TPF0'#11'TWizardForm'#10'WizardForm'#4'Left'#3#4#1#6'Height'#3#177#1#3'Top'#3
   +#146#0#5'Width'#3#143#2#18'HorzScrollBar.Page'#3#142#2#18'VertScrollBar.Page'
-  +#3#168#1#13'ActiveControl'#7#6'bbNext'#7'Caption'#6#21'Call Statistcs Wizard'
-  +#12'ClientHeight'#3#169#1#11'ClientWidth'#3#143#2#8'OnCreate'#7#10'FormCreat'
+  +#3#176#1#13'ActiveControl'#7#6'bbNext'#7'Caption'#6#21'Call Statistcs Wizard'
+  +#12'ClientHeight'#3#177#1#11'ClientWidth'#3#143#2#8'OnCreate'#7#10'FormCreat'
   +'e'#8'Position'#7#14'poScreenCenter'#0#12'TPageControl'#8'pcWizard'#4'Left'#2
-  +#16#6'Height'#3'x'#1#5'Width'#3'p'#2#10'ActivePage'#7#10'tsClassify'#8'TabIn'
-  +'dex'#2#2#8'TabOrder'#2#0#0#9'TTabSheet'#9'tsWelcome'#7'Caption'#6#7'Welcome'
-  +#12'ClientHeight'#3'^'#1#11'ClientWidth'#3'h'#2#0#6'TLabel'#9'lbWelcome'#4'L'
-  +'eft'#2#20#6'Height'#2#24#3'Top'#2#26#5'Width'#2'l'#7'Caption'#6#11'Get star'
-  +'ted'#12'Font.CharSet'#2#14#11'Font.Height'#2#237#10'Font.Style'#11#6'fsBold'
-  +#0#11'ParentColor'#8#0#0#5'TMemo'#5'Memo1'#4'Left'#3#12#1#6'Height'#3#224#0#3
-  +'Top'#2'J'#5'Width'#3'8'#1#13'Lines.Strings'#1#6#0#6'$Steps for gathering ca'
-  +'ll statistics:'#6#0#6'81. Importing database from file, containing informat'
-  +'ion '#6'/about date&time of call, phone number and call '#6#9'duration.'#6#0
-  +#6'#2. Creating groups of called party.'#6#0#6'43. Classifying called party '
-  +'by newly created groups.'#6#0#6',4. Getting statistics and displaying chart'
-  +'s.'#0#8'TabOrder'#2#0#0#0#0#9'TTabSheet'#8'tsImport'#7'Caption'#6#6'Import'
-  +#12'ClientHeight'#3'^'#1#11'ClientWidth'#3'h'#2#0#6'TLabel'#6'Label1'#4'Left'
-  +#2#20#6'Height'#2#24#3'Top'#2#26#5'Width'#3#146#0#7'Caption'#6#14'Importing '
-  +'data'#11'Font.Height'#2#237#10'Font.Style'#11#6'fsBold'#0#11'ParentColor'#8
-  +#0#0#6'TLabel'#7'lbStep1'#4'Left'#2#20#6'Height'#2#20#3'Top'#2#9#5'Width'#2
-  +'U'#7'Caption'#6#12'Step 1 of 4:'#11'Font.Height'#2#240#11'ParentColor'#8#0#0
-  +#6'TLabel'#10'lbImported'#4'Left'#2#21#6'Height'#2#14#3'Top'#2'm'#5'Width'#2
-  +'A'#7'Caption'#6#14'Imported list:'#11'ParentColor'#8#0#0#5'TEdit'#6'edPath'
-  +#4'Left'#2#20#6'Height'#2#24#3'Top'#2'G'#5'Width'#3#200#1#8'TabOrder'#2#0#0#0
-  +#7'TBitBtn'#8'bbBrowse'#4'Left'#3#240#1#6'Height'#2#26#3'Top'#2'G'#5'Width'#2
-  +'g'#7'Caption'#6#7'B&rowse'#7'Default'#9#9'NumGlyphs'#2#0#7'OnClick'#7#13'bb'
-  +'BrowseClick'#8'TabOrder'#2#1#0#0#8'TListBox'#11'lboImported'#4'Left'#2#20#6
-  +'Height'#3#192#0#3'Top'#3#130#0#5'Width'#3#184#0#8'TabOrder'#2#2#0#0#0#9'TTa'
-  +'bSheet'#10'tsClassify'#7'Caption'#6#8'Classify'#12'ClientHeight'#3'^'#1#11
-  +'ClientWidth'#3'h'#2#0#6'TLabel'#7'lbStep2'#4'Left'#2#20#6'Height'#2#20#3'To'
-  +'p'#2#9#5'Width'#2'U'#7'Caption'#6#12'Step 2 of 4:'#11'Font.Height'#2#240#11
-  +'ParentColor'#8#0#0#6'TLabel'#6'Label2'#4'Left'#2#20#6'Height'#2#24#3'Top'#2
-  +#26#5'Width'#3#129#0#7'Caption'#6#14'Classification'#11'Font.Height'#2#237#10
-  +'Font.Style'#11#6'fsBold'#0#11'ParentColor'#8#0#0#8'TListBox'#8'lboCPall'#4
-  +'Left'#2'<'#6'Height'#3#224#0#3'Top'#2'Z'#5'Width'#3#175#0#8'TabOrder'#2#0#0
-  +#0#8'TListBox'#10'lboCPgroup'#4'Left'#3'p'#1#6'Height'#3#224#0#3'Top'#2'Z'#5
-  +'Width'#3#175#0#8'TabOrder'#2#1#0#0#0#0#7'TBitBtn'#6'bbPrev'#4'Left'#3#209#0
-  +#6'Height'#2'#'#3'Top'#3#128#1#5'Width'#2'x'#7'Caption'#6#7'< &Back'#7'Enabl'
-  +'ed'#8#9'NumGlyphs'#2#0#7'OnClick'#7#11'bbPrevClick'#8'TabOrder'#2#1#0#0#7'T'
-  +'BitBtn'#6'bbNext'#4'Left'#3'`'#1#6'Height'#2'#'#3'Top'#3#128#1#5'Width'#2'x'
-  +#7'Caption'#6#7'&Next >'#11'ModalResult'#2#1#9'NumGlyphs'#2#0#7'OnClick'#7#11
-  +'bbNextClick'#8'TabOrder'#2#2#0#0#7'TBitBtn'#8'bbCancel'#4'Left'#3#8#2#6'Hei'
-  +'ght'#2'#'#3'Top'#3#128#1#5'Width'#2'x'#6'Cancel'#9#7'Caption'#6#6'Cancel'#4
-  +'Kind'#7#8'bkCancel'#11'ModalResult'#2#2#9'NumGlyphs'#2#0#8'TabOrder'#2#3#0#0
-  +#11'TOpenDialog'#10'OpenDialog'#5'Title'#6#18'Open existing file'#6'Filter'#6
-  +'=Comma Separated Values file (*.csv)|*.csv|All files (*.*)|*.*'#4'left'#2' '
-  +#3'top'#3#128#1#0#0#0
+  +#16#6'Height'#3'x'#1#5'Width'#3'p'#2#10'ActivePage'#7#8'tsSelect'#8'TabIndex'
+  +#2#4#8'TabOrder'#2#0#0#9'TTabSheet'#9'tsWelcome'#7'Caption'#6#7'Welcome'#12
+  +'ClientHeight'#3'['#1#11'ClientWidth'#3'h'#2#0#6'TLabel'#9'lbWelcome'#4'Left'
+  +#2#20#6'Height'#2#24#3'Top'#2#26#5'Width'#2'l'#7'Caption'#6#11'Get started'
+  +#12'Font.CharSet'#2#14#11'Font.Height'#2#237#10'Font.Style'#11#6'fsBold'#0#11
+  +'ParentColor'#8#0#0#5'TMemo'#5'Memo1'#4'Left'#3#12#1#6'Height'#3#224#0#3'Top'
+  +#2'J'#5'Width'#3'8'#1#13'Lines.Strings'#1#6#0#6'$Steps for gathering call st'
+  +'atistics:'#6#0#6',1. Importing database from file, containing '#6#12'inform'
+  +'ation '#6'/about date&time of call, phone number and call '#6#9'duration.'#6
+  +#0#6'#2. Creating groups of called party.'#6#0#6'43. Classifying called part'
+  +'y by newly created groups.'#6#0#6',4. Getting statistics and displaying cha'
+  +'rts.'#0#8'TabOrder'#2#0#0#0#0#9'TTabSheet'#8'tsImport'#7'Caption'#6#6'Impor'
+  +'t'#12'ClientHeight'#3'['#1#11'ClientWidth'#3'h'#2#0#6'TLabel'#6'Label1'#4'L'
+  +'eft'#2#20#6'Height'#2#24#3'Top'#2#26#5'Width'#3#146#0#7'Caption'#6#14'Impor'
+  +'ting data'#11'Font.Height'#2#237#10'Font.Style'#11#6'fsBold'#0#11'ParentCol'
+  +'or'#8#0#0#6'TLabel'#7'lbStep1'#4'Left'#2#20#6'Height'#2#20#3'Top'#2#9#5'Wid'
+  +'th'#2'U'#7'Caption'#6#12'Step 1 of 4:'#11'Font.Height'#2#240#11'ParentColor'
+  +#8#0#0#6'TLabel'#10'lbImported'#4'Left'#2#21#6'Height'#2#18#3'Top'#2'm'#5'Wi'
+  +'dth'#2'^'#7'Caption'#6#14'Imported data:'#11'ParentColor'#8#0#0#6'TBevel'#6
+  +'Bevel1'#4'Left'#3#240#0#6'Height'#3#192#0#3'Top'#3#130#0#5'Width'#3'g'#1#0#0
+  +#6'TLabel'#9'lbStatus1'#4'Left'#3#252#0#6'Height'#2#19#3'Top'#3#146#0#5'Widt'
+  +'h'#3#248#0#8'AutoSize'#8#7'Caption'#6#20'No data imported yet'#11'ParentCol'
+  +'or'#8#0#0#5'TEdit'#6'edPath'#4'Left'#2#20#6'Height'#2#24#3'Top'#2'G'#5'Widt'
+  +'h'#3#200#1#8'TabOrder'#2#0#0#0#7'TBitBtn'#8'bbBrowse'#4'Left'#3#240#1#6'Hei'
+  +'ght'#2#26#3'Top'#2'G'#5'Width'#2'g'#7'Caption'#6#7'B&rowse'#9'NumGlyphs'#2#0
+  +#7'OnClick'#7#13'bbBrowseClick'#8'TabOrder'#2#1#0#0#8'TListBox'#11'lboImport'
+  +'ed'#4'Left'#2#20#6'Height'#3#192#0#3'Top'#3#130#0#5'Width'#3#184#0#8'TabOrd'
+  +'er'#2#2#0#0#0#9'TTabSheet'#11'tsCreateGrp'#7'Caption'#6#13'Create Groups'#12
+  +'ClientHeight'#3'['#1#11'ClientWidth'#3'h'#2#0#6'TLabel'#7'lbStep2'#4'Left'#2
+  +#20#6'Height'#2#20#3'Top'#2#9#5'Width'#2'U'#7'Caption'#6#12'Step 2 of 4:'#11
+  +'Font.Height'#2#240#11'ParentColor'#8#0#0#6'TLabel'#6'Label2'#4'Left'#2#20#6
+  +'Height'#2#24#3'Top'#2#26#5'Width'#3#179#0#7'Caption'#6#18'Creation of group'
+  +'s'#11'Font.Height'#2#237#10'Font.Style'#11#6'fsBold'#0#11'ParentColor'#8#0#0
+  +#6'TBevel'#6'Bevel2'#4'Left'#3#240#0#6'Height'#3#192#0#3'Top'#3#130#0#5'Widt'
+  +'h'#3'g'#1#0#0#6'TLabel'#9'lbStatus2'#4'Left'#3#252#0#6'Height'#2#24#3'Top'#3
+  +#143#0#5'Width'#3#240#0#8'AutoSize'#8#7'Caption'#6#21'No groups created yet'
+  +#11'ParentColor'#8#0#0#8'TListBox'#9'lboGroups'#4'Left'#2#20#6'Height'#3#232
+  +#0#3'Top'#2'Z'#5'Width'#3#184#0#8'TabOrder'#2#0#0#0#7'TBitBtn'#5'bbNew'#4'Le'
+  +'ft'#3#240#0#6'Height'#2#30#3'Top'#2'Z'#5'Width'#2'i'#7'Caption'#6#4'&Add'#7
+  +'Default'#9#9'NumGlyphs'#2#0#7'OnClick'#7#10'bbNewClick'#8'TabOrder'#2#1#0#0
+  +#0#9'TTabSheet'#10'tsClassify'#7'Caption'#6#8'Classify'#12'ClientHeight'#3'['
+  +#1#11'ClientWidth'#3'h'#2#0#6'TLabel'#7'lbStep3'#4'Left'#2#20#6'Height'#2#20
+  +#3'Top'#2#9#5'Width'#2'U'#7'Caption'#6#12'Step 3 of 4:'#11'Font.Height'#2#240
+  +#11'ParentColor'#8#0#0#6'TLabel'#6'Label3'#4'Left'#2#20#6'Height'#2#24#3'Top'
+  +#2#26#5'Width'#3#129#0#7'Caption'#6#14'Classification'#11'Font.Height'#2#237
+  +#10'Font.Style'#11#6'fsBold'#0#11'ParentColor'#8#0#0#8'TListBox'#8'lboCPall'
+  +#4'Left'#2'<'#6'Height'#3#224#0#3'Top'#2'Z'#5'Width'#3#175#0#11'MultiSelect'
+  +#9#8'TabOrder'#2#0#0#0#8'TListBox'#10'lboCPgroup'#4'Left'#3'p'#1#6'Height'#3
+  +#198#0#3'Top'#2's'#5'Width'#3#175#0#11'MultiSelect'#9#8'TabOrder'#2#1#0#0#7
+  +'TBitBtn'#5'bbAdd'#4'Left'#3#8#1#6'Height'#2#28#3'Top'#3#162#0#5'Width'#2'O'
+  +#7'Caption'#6#6'&Add >'#7'Enabled'#8#9'NumGlyphs'#2#0#7'OnClick'#7#10'bbAddC'
+  +'lick'#8'TabOrder'#2#2#0#0#7'TBitBtn'#8'bbRemove'#4'Left'#3#8#1#6'Height'#2
+  +#28#3'Top'#3#228#0#5'Width'#2'O'#7'Caption'#6#9'< &Remove'#7'Enabled'#8#9'Nu'
+  +'mGlyphs'#2#0#7'OnClick'#7#13'bbRemoveClick'#8'TabOrder'#2#3#0#0#9'TComboBox'
+  +#15'cobGoupSelector'#4'Left'#3'p'#1#6'Height'#2#24#3'Top'#2'Z'#5'Width'#3#175
+  +#0#16'AutoCompleteText'#11#22'cbactEndOfLineComplete'#20'cbactSearchAscendin'
+  +'g'#0#10'ItemHeight'#2#16#9'OnCloseUp'#7#22'cobGoupSelectorCloseUp'#5'Style'
+  +#7#14'csDropDownList'#8'TabOrder'#2#4#0#0#0#9'TTabSheet'#8'tsSelect'#7'Capti'
+  +'on'#6#6'Select'#12'ClientHeight'#3'['#1#11'ClientWidth'#3'h'#2#0#6'TLabel'#7
+  ,'lbStep4'#4'Left'#2#20#6'Height'#2#20#3'Top'#2#9#5'Width'#2'U'#7'Caption'#6
+  +#12'Step 4 of 4:'#11'Font.Height'#2#240#11'ParentColor'#8#0#0#6'TLabel'#6'La'
+  +'bel4'#4'Left'#2#20#6'Height'#2#24#3'Top'#2#26#5'Width'#3#155#0#7'Caption'#6
+  +#17'Statistics charts'#11'Font.Height'#2#237#10'Font.Style'#11#6'fsBold'#0#11
+  +'ParentColor'#8#0#0#6'TLabel'#7'Label42'#4'Left'#3#196#1#6'Height'#2#18#3'To'
+  +'p'#2''#5'Width'#2'v'#7'Caption'#6#21'Select from the list:'#11'ParentColor'
+  +#8#0#0#11'TRadioGroup'#6'rgType'#4'Left'#3#188#1#6'Height'#2'P'#3'Top'#2#31#5
+  +'Width'#3#164#0#8'AutoFill'#9#7'Caption'#6#14'Get statistics'#28'ChildSizing'
+  +'.LeftRightSpacing'#2#6#28'ChildSizing.TopBottomSpacing'#2#6#29'ChildSizing.'
+  +'EnlargeHorizontal'#7#24'crsHomogenousChildResize'#27'ChildSizing.EnlargeVer'
+  +'tical'#7#24'crsHomogenousChildResize'#28'ChildSizing.ShrinkHorizontal'#7#14
+  +'crsScaleChilds'#26'ChildSizing.ShrinkVertical'#7#14'crsScaleChilds'#18'Chil'
+  +'dSizing.Layout'#7#29'cclLeftToRightThenTopToBottom'#27'ChildSizing.Controls'
+  +'PerLine'#2#1#12'ClientHeight'#2':'#11'ClientWidth'#3#160#0#9'ItemIndex'#2#0
+  +#13'Items.Strings'#1#6#9'By groups'#6#16'By phone numbers'#0#7'OnClick'#7#11
+  +'rgTypeClick'#8'TabOrder'#2#0#0#0#8'TListBox'#9'lboPhones'#4'Left'#3#188#1#6
+  +'Height'#3#184#0#3'Top'#3#151#0#5'Width'#3#164#0#8'TabOrder'#2#1#0#0#0#0#7'T'
+  +'BitBtn'#6'bbPrev'#4'Left'#3#209#0#6'Height'#2'#'#3'Top'#3#136#1#5'Width'#2
+  +'x'#7'Caption'#6#7'< &Back'#7'Enabled'#8#9'NumGlyphs'#2#0#7'OnClick'#7#11'bb'
+  +'PrevClick'#8'TabOrder'#2#1#0#0#7'TBitBtn'#6'bbNext'#4'Left'#3'`'#1#6'Height'
+  +#2'#'#3'Top'#3#136#1#5'Width'#2'x'#7'Caption'#6#7'&Next >'#11'ModalResult'#2
+  +#1#9'NumGlyphs'#2#0#7'OnClick'#7#11'bbNextClick'#8'TabOrder'#2#2#0#0#7'TBitB'
+  +'tn'#8'bbCancel'#4'Left'#3#8#2#6'Height'#2'#'#3'Top'#3#136#1#5'Width'#2'x'#6
+  +'Cancel'#9#7'Caption'#6#6'Cancel'#4'Kind'#7#8'bkCancel'#11'ModalResult'#2#2#9
+  +'NumGlyphs'#2#0#8'TabOrder'#2#3#0#0#11'TOpenDialog'#10'OpenDialog'#5'Title'#6
+  +#18'Open existing file'#6'Filter'#6'=Comma Separated Values file (*.csv)|*.c'
+  +'sv|All files (*.*)|*.*'#4'left'#2' '#3'top'#3#128#1#0#0#0
 ]);

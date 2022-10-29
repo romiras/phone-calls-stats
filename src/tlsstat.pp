@@ -5,7 +5,7 @@ interface
 uses Classes, TlsTypes;
 
 var
-     BondList: TList;
+     BondList: TBondList;
 
 
      CatHistTimes,
@@ -19,29 +19,29 @@ var
      SomeTel: Cardinal;
 
 
-procedure InitTelStatistics (_Tel: Cardinal);
+procedure InitTelStatistics (Phone: string);
 procedure InitCatStatistics (Fn: string);
 
-procedure GetTelStatistics (List: TList);
-procedure GetCatStatistics (List: TList);
+procedure GetTelStatistics (List: TCallList);
+procedure GetCatStatistics (List: TBondList);
 
-procedure ShowTelStatistics (List: TList);
-procedure ShowCatStatistics (List: TList);
+procedure ShowTelStatistics (List: TCallList);
+procedure ShowCatStatistics (List: TBondList);
 
 procedure EndCatStatistics;
 
 implementation
-uses SysUtils, DateUtils, tlsconv, tlscatrd;
+uses SysUtils, DateUtils, tlsconv;
 
 var
      dDate: TDateTime;
 
-procedure InitTelStatistics (_Tel: Cardinal);
+procedure InitTelStatistics (Phone: string);
 begin
      days := 0;
      dDate := 0.0;
 
-     SomeTel := _Tel;
+     SomeTel := DigiTel (Phone);
      CallsTo := 0;
      MaxCallDuration := 0;
      TotalCallsDurationTo := 0;
@@ -52,9 +52,8 @@ begin
      days := 0;
      dDate := 0.0;
 
-     BondList := ReadBonds (Fn);
+     BondList.LoadFromFile (Fn);
      BondList.Pack;
-     BondList.Sort (@CompareByTel);
      //ShowBondList (BondList);
 
      FillChar (CatHistCalls, SizeOf(CatMaxTimes), 0);
@@ -62,7 +61,7 @@ begin
      FillChar (CatMaxTimes,  SizeOf(CatMaxTimes), 0);
 end;
 
-procedure GetTelStatistics (List: TList);
+procedure GetTelStatistics (List: TCallList);
 var
      k: integer;
 begin
@@ -90,7 +89,7 @@ begin
      );
 end;
 
-procedure GetCatStatistics (List: TList);
+procedure GetCatStatistics (List: TBondList);
 var
      k, iobj: integer;
      cat: TCategory;
@@ -104,7 +103,7 @@ begin
                inc(days);
           end;
 
-          iobj := FindObject (BondList, TelNo);
+          iobj := BondList.FindObject (TCall(List[k]));
           if iobj >= 0 then
                cat := TBond(BondList[iobj]).Category
           else
@@ -148,7 +147,7 @@ begin
      );
 end;
 
-procedure ShowTelStatistics (List: TList);
+procedure ShowTelStatistics (List: TCallList);
 begin
      writeln;
      writeln (Format ('%d days of calls brutto of %d days total',
@@ -169,7 +168,7 @@ begin
       [MaxCallDuration/60.0]));
 end;
 
-procedure ShowCatStatistics (List: TList);
+procedure ShowCatStatistics (List: TBondList);
 begin
      writeln;
      writeln (Format ('%d days of calls brutto of %d days total',

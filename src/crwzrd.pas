@@ -37,6 +37,7 @@ var
   grpName: string;
 begin
   grpName := InputBox('Group name:', 'Type group name here:', 'new group');
+  ShowMessage ('"'+grpName+'"');
   if grpName <> '' then
      lsGroups.Items.Add(grpName);
 end;
