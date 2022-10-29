@@ -37,14 +37,8 @@ end;
 
 
 procedure DoneCallList;
-var
-     i : Integer;
 begin
-     //FreeItems (CallList);
-     for i := 0 to CallList.Count-1 do
-       TCall(CallList[i]).Free;
-     CallList.Free;
-
+     CallList.FreeItems;
      FreeAndNil (CallList);
 end;
 
@@ -82,6 +76,8 @@ Var
      param: string;
      pluginname: PlgName;
      res: integer;
+     TelStat: TTelStatistics;
+     CatStat: TCatStatistics;
 
 Begin
      GetParameters (InputCSV, op, Param);
@@ -110,17 +106,23 @@ Begin
 
      if op = '1' then
      begin
-          InitTelStatistics (DigiTel(Param));
-          GetTelStatistics (CallList);
-          ShowTelStatistics (CallList);
+          TelStat := TTelStatistics.Create (Param, CallList);
+          TelStat.Calc;
+          TelStat.Show;
+          TelStat.Free;
      end
      else
      if op = '2' then
      begin
-          InitCatStatistics (Param);
-          GetCatStatistics (CallList);
-          ShowCatStatistics (CallList);
-          EndCatStatistics;
+          writeln ('1');
+          CatStat := TCatStatistics.Create (Param, CallList);
+          writeln ('2');
+          CatStat.Calc;
+          writeln ('3');
+          CatStat.Show;
+          writeln ('4');
+          CatStat.Free;
+          writeln ('5');
      end;
 
      DoneCallList;

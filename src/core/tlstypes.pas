@@ -20,7 +20,7 @@ const
   Err_ListOp        = -4;
 
 Type
-     TCategory = (Alliance,Friends,Work,Others);
+     TCategory = (Relatives,Friends,Work,Others);
      TCatHist = array [TCategory] of word;
 
      {$IFNDEF FPC}
@@ -39,10 +39,6 @@ Type
        Time: word;
        constructor Create (dDate: TDateTime; cTelNo: LongWord; wTime: word);
      end;
-
-{     TCallList = class (TList)
-       procedure LoadFromFile (FileName: string); virtual;
-     end;}
 
      TListSorted = class (TList)
       public
@@ -79,8 +75,8 @@ Type
      TCallList = class (TListSorted)
      public
         function Compare(Item1, Item2: Pointer): Integer; override;
-        procedure InitStatistics (Phone: string); virtual; abstract;
-        procedure LoadFromFile (fn: string); virtual; abstract;
+        //procedure LoadFromFile (fn: string); virtual; abstract;
+        procedure FreeItems;
      end;
 
      TBondList = class (TListSorted)
@@ -89,9 +85,15 @@ Type
         procedure LoadFromFile (fn: string);
      end;
 
-     ImportFunc = function (_FilePath: string; var _List: TCallList): integer;
+     TBaseStatistics = class
+     protected
+        SourceDB: TCallList;
+     public
+        constructor Create (SrcDB: TCallList);// overload;
+        procedure   Calc; virtual; abstract;
+     end;
 
-procedure FreeItems (myList: TList);
+
 function GetCategoryName (Cat: TCategory): string;
 function GetCategoryIndex (Ind: byte): TCategory;
 function CompareByTel (Item1 : Pointer; Item2 : Pointer) : Integer;
@@ -106,11 +108,12 @@ var
 Implementation
 Uses SysUtils, IniFiles, TlsFunc;
 
+
 function GetCategoryName (Cat: TCategory): string;
 begin
      case Cat of
-     Alliance:
-      Result := 'Alliance';
+     Relatives:
+      Result := 'Relatives';
      Friends:
       Result := 'Friends';
      Work:
@@ -120,11 +123,12 @@ begin
      end;
 end;
 
+
 function GetCategoryIndex (Ind: byte): TCategory;
 begin
      case Ind of
      1:
-      Result := Alliance;
+      Result := Relatives;
      2:
       Result := Friends;
      3:
@@ -134,18 +138,23 @@ begin
      end;
 end;
 
+
 constructor TBond.Create (Tel: string; Cat: TCategory);
 begin
+     Inherited Create;
      Self.TelNo := DigiTel (Tel);
      Self.Category := Cat;
 end;
 
+
 constructor TCall.Create (dDate: TDateTime; cTelNo: LongWord; wTime: word);
 begin
+     Inherited Create;
      Self.Date := dDate;
      Self.TelNo := cTelNo;
      Self.Time := wTime;
 end;
+
 
 function CompareByTel (Item1 : Pointer; Item2 : Pointer) : Integer;
 var
@@ -163,15 +172,16 @@ begin
      Result := -1;
 end;
 
+
 constructor TListSorted.Create;
 
 begin
-   Duplicates := dupIgnore;
    inherited Create;
+   Duplicates := dupIgnore;
 end;
 
-function TListSorted.Add(Item : Pointer) : Integer;
 
+function TListSorted.Add(Item : Pointer) : Integer;
 var
    nCount  : Integer;
    bFound  : Boolean;
@@ -209,6 +219,12 @@ begin
      Result := -1
   else
      Result := 0;
+end;
+
+constructor TBaseStatistics.Create (SrcDB: TCallList);
+begin
+  Inherited Create;
+  SourceDB := SrcDB;
 end;
 
 
@@ -257,11 +273,12 @@ begin
   if TBond(Item1).TelNo > TBond(Item2).TelNo then
      Result := 1
   else
-  if TBond(Item1).TelNo = TBond(Item2).TelNo then
-     Result := 0
+  if TBond(Item1).TelNo < TBond(Item2).TelNo then
+     Result := -1
   else
-     Result := -1;
+     Result := 0;
 end;
+
 
 procedure TBondList.LoadFromFile (fn: string);
 var
@@ -278,7 +295,7 @@ begin
     Ini.ReadSections (Sections);
     Values := TStringList.Create;
 
-    for k := 0 to Pred (Sections.Count) do
+    for k := 0 to Sections.Count-1 do
     begin
          Ini.ReadSectionValues (Sections[k], Values);
          {$IFDEF DEBUG}
@@ -287,7 +304,7 @@ begin
          writeln (Values.Count, ' read');
          {$ENDIF GUI}
          {$ENDIF DEBUG}
-         for i := 0 to Pred (Values.Count) do
+         for i := 0 to Values.Count-1 do
          begin
             tel := Values[i];
             System.delete (tel, 1, 1); { delete first '=' }
@@ -308,12 +325,13 @@ begin
   end;
 end;
 
-procedure FreeItems (myList: TList);
+
+procedure TCallList.FreeItems;
 var
      I: integer;
 begin
-     for i := 0 to Pred (myList.Count) do
-          TObject (myList[i]).Free;
+     for i := 0 to Self.Count-1 do
+          TCall(Self[i]).Free;
 end;
 
 
@@ -330,14 +348,13 @@ end;
 initialization
 
   CPList := TList.Create;
-  CallList := TCallList.Create;
+  //CallList := TCallList.Create;
   CPImported := TStringList.Create;
 
 finalization
 
   CPImported.Free;
-  //FreeItems (CallList);
-  CallList.Free;
+  //CallList.Free;
   CP_Free;
 
 end.
